@@ -10,5 +10,5 @@ jobs:
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "Example CML comment on issue comment 1" >> report.md
+        echo "Example CML comment on issue comment 2" >> report.md
         cml comment create --pr --publish report.md
