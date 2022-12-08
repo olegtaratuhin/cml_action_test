@@ -15,5 +15,5 @@ jobs:
         echo "GitHub ${{ github.event }}"
         echo "GitHub event ${{ github.event.issue_comment }}"
         echo "GitHub event ${{ github.event.issue_comment.comment_id }}"
-        echo "Example CML comment on issue comment 5" >> report.md
+        echo "Example CML comment on issue comment 6" >> report.md
         cml comment create --pr --publish --commit-sha=${{ github.event.issue_comment.comment_id }} report.md

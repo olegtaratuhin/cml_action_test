@@ -1,5 +1,7 @@
 name: CML pull request
-on: pull_request
+on:
+  pull_request:
+    types: []
 jobs:
   cml:
     runs-on: ubuntu-latest
@@ -12,5 +14,5 @@ jobs:
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "Example CML comment on pull request 5" >> report.md
+        echo "Example CML comment on pull request 6" >> report.md
         cml comment create --pr --publish report.md
