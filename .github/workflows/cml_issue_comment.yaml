@@ -13,4 +13,4 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "Example CML comment on issue comment 4" >> report.md
-        cml comment create --pr --publish report.md
+        cml comment create --pr --publish --commit-sha=${{ github.event.pull_request.head.sha }} report.md
