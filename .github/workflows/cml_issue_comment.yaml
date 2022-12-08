@@ -6,11 +6,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: ${{issue_comment.commit_id}}
+        ref: ${{ github.event.issue_comment.commit_id }}
     - uses: iterative/setup-cml@v1
     - name: Display report
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "Example CML comment on issue comment 2" >> report.md
+        echo "Example CML comment on issue comment 3" >> report.md
         cml comment create --pr --publish report.md
