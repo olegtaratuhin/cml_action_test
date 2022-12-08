@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: ${{issue_comment.commit_id}}
     - uses: iterative/setup-cml@v1
     - name: Display report
       env:
