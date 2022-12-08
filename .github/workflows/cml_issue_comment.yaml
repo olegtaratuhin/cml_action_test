@@ -5,15 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.issue_comment.commit_id }}
+    - name: Checkout Pull Request
+      run: hub pr checkout ${{ github.event.issue.number }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: iterative/setup-cml@v1
     - name: Display report
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "GitHub ${{ github.event }}"
-        echo "GitHub event ${{ github.event.issue_comment }}"
-        echo "GitHub event ${{ github.event.issue_comment.comment_id }}"
+        echo "GitHub event ${{ github.event.issue.number }}"
         echo "Example CML comment on issue comment 6" >> report.md
-        cml comment create --pr --publish --commit-sha=${{ github.event.issue_comment.comment_id }} report.md
+        cml comment create --pr --publish report.md
