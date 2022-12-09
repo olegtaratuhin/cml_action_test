@@ -29,5 +29,5 @@ jobs:
         echo input="${{ steps.check.outputs.comment_body }}"
         printf %q $input
         echo "GitHub event ${{ github.event.issue.number }}"
-        echo "Example CML comment on issue comment 7" >> report.md
+        echo "Example CML comment on issue comment 8" >> report.md
         cml comment create --pr --publish report.md
