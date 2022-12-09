@@ -4,16 +4,30 @@ jobs:
   cml:
     runs-on: ubuntu-latest
     steps:
+    - name: Check for trigger word
+      uses: khan/pull-request-comment-trigger@v1.1.0
+      id: check
+      with:
+        trigger: "@launch:"
+        reaction: rocket
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     - uses: actions/checkout@v3
+      if: steps.check.outputs.triggered == 'true'
     - name: Checkout Pull Request
       run: hub pr checkout ${{ github.event.issue.number }}
+      if: steps.check.outputs.triggered == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: iterative/setup-cml@v1
+      if: steps.check.outputs.triggered == 'true'
     - name: Display report
+      if: steps.check.outputs.triggered == 'true'
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        echo input="${{ steps.check.outputs.comment_body }}"
+        printf %q $input
         echo "GitHub event ${{ github.event.issue.number }}"
         echo "Example CML comment on issue comment 7" >> report.md
         cml comment create --pr --publish report.md
